@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: ProductsScreen.routeName,
       routes: {
-        ProductsScreen.routeName : (context) => ProductsScreen(),
+        ProductsScreen.routeName: (context) => const ProductsScreen(),
       },
     );
   }
