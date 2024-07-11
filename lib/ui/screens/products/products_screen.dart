@@ -1,13 +1,30 @@
+import 'package:ecommerce_route/data/repos/products_repo_impl.dart';
+import 'package:ecommerce_route/domain/repos/products/products_repo.dart';
+import 'package:ecommerce_route/domain/useCases/productsUseCase/products_use_case.dart';
 import 'package:ecommerce_route/ui/screens/products/product_widget.dart';
+import 'package:ecommerce_route/ui/screens/products/products_view_model.dart';
 import 'package:ecommerce_route/ui/utils/app_assets.dart';
 import 'package:ecommerce_route/ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductsScreen extends StatelessWidget {
+class ProductsScreen extends StatefulWidget {
   const ProductsScreen({super.key});
 
   static const String routeName = "products";
+
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
+  ProductsViewModel productsViewModel = ProductsViewModel(ProductsUseCase(ProductsRepoImpl()));
+
+  @override
+  void initState() {
+    super.initState();
+    productsViewModel.getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
