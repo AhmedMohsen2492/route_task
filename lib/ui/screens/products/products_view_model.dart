@@ -4,13 +4,18 @@ import 'package:ecommerce_route/domain/useCases/productsUseCase/products_use_cas
 import 'package:ecommerce_route/ui/utils/base_states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductsViewModel extends Cubit{
-  ProductsUseCase productsUseCase ;
+class ProductsViewModel extends Cubit {
+  ProductsUseCase productsUseCase;
+
   ProductsViewModel(this.productsUseCase) : super(BaseInitialState);
 
-  Future<Either<String, Products>> getProducts(){
-    return productsUseCase.execute();
+  void getProducts() async {
+    emit(BaseLoadingState());
+    Either<String, Products> response = await productsUseCase.execute();
+    response.fold((error) {
+      emit(BaseErrorState(error));
+    }, (success) {
+      emit(BaseSuccessState(success));
+    });
   }
-
 }
-

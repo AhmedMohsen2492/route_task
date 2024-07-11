@@ -1,10 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_route/data/model/Products.dart';
 import 'package:ecommerce_route/ui/utils/app_assets.dart';
 import 'package:ecommerce_route/ui/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget({super.key});
+  int index;
+
+  Products products;
+
+  ProductWidget(this.products, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +30,8 @@ class ProductWidget extends StatelessWidget {
             children: [
               Expanded(
                 flex: 50,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    image: DecorationImage(
-                        image: AssetImage(AppAssets.test), fit: BoxFit.fill),
-                  ),
+                child: CachedNetworkImage(
+                  imageUrl: products.products![index].images!.first,
                 ),
               ),
               Expanded(
@@ -43,14 +42,14 @@ class ProductWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        "Nike Air Jordon",
+                        "${products.products?[index].title}",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: GoogleFonts.poppins(
                             color: AppColors.primary, fontSize: 16),
                       ),
                       Text(
-                        "Nike Air Jordon for will go to scool kos a",
+                        "${products.products?[index].description}",
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: GoogleFonts.poppins(
@@ -59,7 +58,8 @@ class ProductWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "EGP 1,200",
+                            "EGP ${(products.products![index].price!).toStringAsFixed(0)}",
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                                 color: AppColors.primary, fontSize: 14),
                           ),
@@ -67,7 +67,8 @@ class ProductWidget extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            "2000 EGP",
+                            "${(((products.products![index].price)! * (products.products![index].discountPercentage! / 100)) + (products.products![index].price!)).toStringAsFixed(0)} EGP",
+                            overflow: TextOverflow.ellipsis,
                             style: GoogleFonts.poppins(
                               color: AppColors.primary.withOpacity(0.6),
                               fontSize: 12,
@@ -79,15 +80,7 @@ class ProductWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Review",
-                            style: GoogleFonts.poppins(
-                                color: AppColors.primary, fontSize: 14),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "(4.6)",
+                            "Review (${products.products![index].rating})",
                             style: GoogleFonts.poppins(
                                 color: AppColors.primary, fontSize: 14),
                           ),

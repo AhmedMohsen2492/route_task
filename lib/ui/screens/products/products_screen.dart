@@ -1,11 +1,12 @@
 import 'package:ecommerce_route/data/repos/products_repo_impl.dart';
-import 'package:ecommerce_route/domain/repos/products/products_repo.dart';
 import 'package:ecommerce_route/domain/useCases/productsUseCase/products_use_case.dart';
 import 'package:ecommerce_route/ui/screens/products/product_widget.dart';
 import 'package:ecommerce_route/ui/screens/products/products_view_model.dart';
 import 'package:ecommerce_route/ui/utils/app_assets.dart';
 import 'package:ecommerce_route/ui/utils/app_colors.dart';
+import 'package:ecommerce_route/ui/utils/base_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -18,12 +19,13 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  ProductsViewModel productsViewModel = ProductsViewModel(ProductsUseCase(ProductsRepoImpl()));
+  ProductsViewModel viewModel =
+      ProductsViewModel(ProductsUseCase(ProductsRepoImpl()));
 
   @override
   void initState() {
     super.initState();
-    productsViewModel.getProducts();
+    viewModel.getProducts();
   }
 
   @override
@@ -76,23 +78,42 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   ),
                 ),
                 IconButton(
-                    onPressed: (){},
-                    icon:  Image.asset(
-                      AppAssets.shoppingIcon,
-                    ),
+                  onPressed: () {},
+                  icon: Image.asset(
+                    AppAssets.shoppingIcon,
+                  ),
                 ),
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 0.8),
-                itemBuilder: (context, index) => const ProductWidget(),
-                itemCount: 10,
-              ),
+            BlocBuilder(
+              bloc: viewModel,
+              builder: (context, state) {
+                if (state is BaseLoadingState) {
+                  return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
+                    ),
+                  );
+                } else if (state is BaseSuccessState) {
+                  return Expanded(
+                    child: GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2, childAspectRatio: 0.8),
+                      itemBuilder: (context, index) =>
+                          ProductWidget(state.products, index),
+                      itemCount: state.products.products!.length,
+                    ),
+                  );
+                } else {
+                  return const Center(child: Text("No data found!"));
+                }
+              },
             ),
           ],
         ),

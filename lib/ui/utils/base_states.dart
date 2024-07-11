@@ -1,8 +1,13 @@
+import 'package:ecommerce_route/data/model/Products.dart';
+
 class BaseInitialState {}
 
 class BaseLoadingState {}
 
-class BaseSuccessState {}
+class BaseSuccessState {
+  Products products ;
+  BaseSuccessState(this.products);
+}
 
 class BaseErrorState {
   String errorMessage;
