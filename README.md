@@ -1,5 +1,3 @@
-![1](https://github.com/user-attachments/assets/64b03b0d-6b51-4de4-be0f-e69c5c30d4de)# route_task
-
 A new Flutter project.
 
 ## Getting Started
