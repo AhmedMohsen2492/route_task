@@ -5,10 +5,11 @@ class Products {
   int? limit;
 
   Products({
-      this.products, 
-      this.total, 
-      this.skip, 
-      this.limit,});
+    this.products,
+    this.total,
+    this.skip,
+    this.limit,
+  });
 
   Products.fromJson(dynamic json) {
     if (json['products'] != null) {
@@ -59,28 +60,29 @@ class Product {
   String? thumbnail;
 
   Product({
-      this.id, 
-      this.title, 
-      this.description, 
-      this.category, 
-      this.price, 
-      this.discountPercentage, 
-      this.rating, 
-      this.stock, 
-      this.tags, 
-      this.brand, 
-      this.sku, 
-      this.weight, 
-      this.dimensions, 
-      this.warrantyInformation, 
-      this.shippingInformation, 
-      this.availabilityStatus, 
-      this.reviews, 
-      this.returnPolicy, 
-      this.minimumOrderQuantity, 
-      this.meta, 
-      this.images, 
-      this.thumbnail,});
+    this.id,
+    this.title,
+    this.description,
+    this.category,
+    this.price,
+    this.discountPercentage,
+    this.rating,
+    this.stock,
+    this.tags,
+    this.brand,
+    this.sku,
+    this.weight,
+    this.dimensions,
+    this.warrantyInformation,
+    this.shippingInformation,
+    this.availabilityStatus,
+    this.reviews,
+    this.returnPolicy,
+    this.minimumOrderQuantity,
+    this.meta,
+    this.images,
+    this.thumbnail,
+  });
 
   Product.fromJson(dynamic json) {
     id = json['id'];
@@ -95,7 +97,9 @@ class Product {
     brand = json['brand'];
     sku = json['sku'];
     weight = json['weight'];
-    dimensions = json['dimensions'] != null ? Dimensions.fromJson(json['dimensions']) : null;
+    dimensions = json['dimensions'] != null
+        ? Dimensions.fromJson(json['dimensions'])
+        : null;
     warrantyInformation = json['warrantyInformation'];
     shippingInformation = json['shippingInformation'];
     availabilityStatus = json['availabilityStatus'];
@@ -153,10 +157,11 @@ class Meta {
   String? qrCode;
 
   Meta({
-      this.createdAt, 
-      this.updatedAt, 
-      this.barcode, 
-      this.qrCode,});
+    this.createdAt,
+    this.updatedAt,
+    this.barcode,
+    this.qrCode,
+  });
 
   Meta.fromJson(dynamic json) {
     createdAt = json['createdAt'];
@@ -164,7 +169,6 @@ class Meta {
     barcode = json['barcode'];
     qrCode = json['qrCode'];
   }
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -184,11 +188,12 @@ class Reviews {
   String? reviewerEmail;
 
   Reviews({
-      this.rating, 
-      this.comment, 
-      this.date, 
-      this.reviewerName, 
-      this.reviewerEmail,});
+    this.rating,
+    this.comment,
+    this.date,
+    this.reviewerName,
+    this.reviewerEmail,
+  });
 
   Reviews.fromJson(dynamic json) {
     rating = json['rating'];
@@ -197,7 +202,6 @@ class Reviews {
     reviewerName = json['reviewerName'];
     reviewerEmail = json['reviewerEmail'];
   }
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -216,16 +220,16 @@ class Dimensions {
   num? depth;
 
   Dimensions({
-      this.width, 
-      this.height, 
-      this.depth,});
+    this.width,
+    this.height,
+    this.depth,
+  });
 
   Dimensions.fromJson(dynamic json) {
     width = json['width'];
     height = json['height'];
     depth = json['depth'];
   }
-
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

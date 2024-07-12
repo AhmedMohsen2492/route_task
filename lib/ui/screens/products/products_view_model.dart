@@ -5,13 +5,15 @@ import 'package:ecommerce_route/domain/useCases/search/search_use_case.dart';
 import 'package:ecommerce_route/ui/utils/base_states.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 
-
+@injectable
 class ProductsViewModel extends Cubit {
   ProductsUseCase productsUseCase;
-  SearchUseCase searchUseCase ;
+  SearchUseCase searchUseCase;
 
-  ProductsViewModel(this.productsUseCase, this.searchUseCase): super(BaseInitialState);
+  ProductsViewModel(this.productsUseCase, this.searchUseCase)
+      : super(BaseInitialState);
 
   TextEditingController searchController = TextEditingController();
 

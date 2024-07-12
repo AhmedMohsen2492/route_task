@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ProductWidget extends StatelessWidget {
   int index;
   Products products;
+
   ProductWidget(this.products, this.index, {super.key});
 
   @override
@@ -35,7 +36,7 @@ class ProductWidget extends StatelessWidget {
                       color: AppColors.primary,
                     ),
                   ),
-                  errorWidget: (context,url,error) => const Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.contain,
                 ),
               ),

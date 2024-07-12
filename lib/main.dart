@@ -1,7 +1,9 @@
+import 'package:ecommerce_route/domain/di/di.dart';
 import 'package:ecommerce_route/ui/screens/products/products_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  configureDependencies();
   runApp(const MyApp());
 }
 

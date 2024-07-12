@@ -1,7 +1,4 @@
-import 'package:ecommerce_route/data/repos/products/products_repo_impl.dart';
-import 'package:ecommerce_route/data/repos/search/search_repo_impl.dart';
-import 'package:ecommerce_route/domain/useCases/productsUseCase/products_use_case.dart';
-import 'package:ecommerce_route/domain/useCases/search/search_use_case.dart';
+import 'package:ecommerce_route/domain/di/di.dart';
 import 'package:ecommerce_route/ui/screens/products/product_widget.dart';
 import 'package:ecommerce_route/ui/screens/products/products_view_model.dart';
 import 'package:ecommerce_route/ui/utils/app_assets.dart';
@@ -21,10 +18,7 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  ProductsViewModel viewModel =
-      ProductsViewModel(
-          ProductsUseCase(ProductsRepoImpl()),
-          SearchUseCase(SearchRepoImpl()));
+  ProductsViewModel viewModel = getIt();
 
   @override
   void initState() {
@@ -46,7 +40,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
               children: [
                 Expanded(
                   child: TextFormField(
-                    onChanged: (text){
+                    onChanged: (text) {
                       viewModel.search(text);
                     },
                     controller: viewModel.searchController,
@@ -119,14 +113,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     ),
                   );
                 } else {
-                  return Expanded(
-                    child: const Center(child: Text(
-                        "No data found !!",
+                  return const Expanded(
+                    child: Center(
+                        child: Text(
+                      "No data found !!",
                       style: TextStyle(
-                        color: AppColors.primary,
-                        fontSize: 28,
-                        fontWeight: FontWeight.w500
-                      ),
+                          color: AppColors.primary,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w500),
                     )),
                   );
                 }

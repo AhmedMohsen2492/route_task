@@ -4,7 +4,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ecommerce_route/data/model/Products.dart';
 import 'package:ecommerce_route/domain/repos/search/search_repo.dart';
 import 'package:http/http.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: SearchRepo)
 class SearchRepoImpl extends SearchRepo {
   @override
   Future<Either<String, Products>> search(String text) async {

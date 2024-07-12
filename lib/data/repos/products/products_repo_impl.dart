@@ -3,7 +3,9 @@ import 'package:dartz/dartz.dart';
 import 'package:ecommerce_route/data/model/Products.dart';
 import 'package:ecommerce_route/domain/repos/products/products_repo.dart';
 import 'package:http/http.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: ProductsRepo)
 class ProductsRepoImpl extends ProductsRepo {
   @override
   Future<Either<String, Products>> getProducts() async {
